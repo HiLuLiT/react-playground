@@ -11,7 +11,7 @@ module.exports = {
 	// set node if using webpack to build an app running in node,
 	target: 'web',
 	// source maps let us see our code when debugging in the browser
-	devTool: 'cheap-module-source-map',
+	devtool: 'cheap-module-source-map',
 	// entry point
 	entry: './src/index',
 	// where we want webpack to output - note: webpack doesn't output code in dev mode, it serves it from memory
