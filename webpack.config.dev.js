@@ -57,7 +57,7 @@ module.exports = {
 				// ignore node_modules since we don't need it to proccesss any files in node modules
 				exclude: /node_modules/,
 				// tell webpack what to do with these js files, we want to run babel on these files
-				use: ["babel-loader"]
+				use: ["babel-loader", "eslint-loader"]
 			},
 			// process CSS
 			{
