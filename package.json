@@ -11,7 +11,7 @@
     "react": "16.8.2",
     "react-dom": "16.8.2",
     "react-redux": "6.0.0",
-    "react-router-dom": "4.3.1",
+    "react-router-dom": "5.0.0",
     "react-toastify": "4.5.2",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
@@ -54,7 +54,9 @@
     "node": ">=8"
   },
   "babel": {
-    "presets": ["babel-preset-react-app"]
+    "presets": [
+      "babel-preset-react-app"
+    ]
   },
   "eslintConfig": {
     "extends": [
