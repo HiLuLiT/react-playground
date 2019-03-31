@@ -1,8 +1,9 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import HomePage from './home/HomePage'
 import AboutPage from './about/AboutPage'
 import Header from './common/Header'
+import PageNotFound from './PageNotFound'
 
 function App() {
 	return (
@@ -10,9 +11,14 @@ function App() {
 			{/*React-router will watch the URL and render the proper route (home/about, based on line 14-15)*/}
 			{/*Our header will always display above*/}
 			<Header/>
-			{/*'exact' prop means only the empty route matches, otherwise this will match any other routes since / is in any route.*/}
-			<Route exact path="/" component={HomePage}/>
-			<Route path="/about" component={AboutPage}/>
+			{/*Switch allows one route to match, like a switch statement*/}
+			<Switch>
+				{/*'exact' prop means only the empty route matches, otherwise this will match any other routes since / is in any route.*/}
+				<Route exact path="/" component={HomePage}/>
+				<Route path="/about" component={AboutPage}/>
+				{/*we don't need to declare a path here, if none of the above match this should load */}
+				<Route component={PageNotFound}/>
+			</Switch>
 		</div>
 	)
 }
