@@ -4,6 +4,7 @@ import HomePage from './home/HomePage'
 import AboutPage from './about/AboutPage'
 import Header from './common/Header'
 import PageNotFound from './PageNotFound'
+import CoursesPage from './courses/CoursesPage'
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 				{/*'exact' prop means only the empty route matches, otherwise this will match any other routes since / is in any route.*/}
 				<Route exact path="/" component={HomePage}/>
 				<Route path="/about" component={AboutPage}/>
+				<Route path="/courses" component={CoursesPage}/>
 				{/*we don't need to declare a path here, if none of the above match this should load */}
 				<Route component={PageNotFound}/>
 			</Switch>
