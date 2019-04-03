@@ -1,4 +1,10 @@
 import React from 'react'
+// let's connect CoursesPage to Redux!
+import {connect} from 'react-redux'
+import mapDispatchToProps from 'react-redux/es/connect/mapDispatchToProps'
+import * as courseActions from '../../redux/actions/courseActions'
+import PropTypes from 'prop-types'
+
 
 class CoursesPage extends React.Component {
 		state = {
@@ -15,7 +21,9 @@ class CoursesPage extends React.Component {
 	handleSubmit = event => {
 			// prevent the form from causing the page to reload
 		event.preventDefault();
-		console.log(this.state.course.title)
+		// The ugly way first - dispatching an action without using mapDispatchToProps as one of connect's parameters.
+		// since we didn't declare mapDispatchToProps, connect automatically adds Dispatch as a prop.
+		this.props.dispatch(courseActions.createCourse(this.state.course))
 	}
 	
 	render() {
@@ -30,4 +38,20 @@ class CoursesPage extends React.Component {
 	}
 }
 
-export default CoursesPage
+CoursesPage.propTypes = {
+	dispatch: PropTypes.func.isRequired
+}
+
+
+//This func determines what state is passed to our component via props.
+// it has 2 arguments - state, and ownProps. we'll use ownProps later (it gives us access to the props that are being attached to the component)
+function mapStateToProps(state, ownProps) {
+	return {
+		// be specific - request only the data your component needs.
+		courses: state.courses
+	}
+}
+
+// the 2 parantheses ()() - this is 2 function calls. the connect function returns a function, that function then calls our component.
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage)
+// mapDispatchToProps parameter is optional, when we omit it, our component gets a dispatch prop injected automatically so we can dispatch actions.
