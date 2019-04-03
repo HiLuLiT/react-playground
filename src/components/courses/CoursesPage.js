@@ -1,7 +1,6 @@
 import React from 'react'
 // let's connect CoursesPage to Redux!
 import {connect} from 'react-redux'
-import mapDispatchToProps from 'react-redux/es/connect/mapDispatchToProps'
 import * as courseActions from '../../redux/actions/courseActions'
 import PropTypes from 'prop-types'
 
@@ -33,12 +32,18 @@ class CoursesPage extends React.Component {
 				<h3>Add Course</h3>
 				<input type="text" onChange={this.handleChange} value={this.state.course.title}/>
 				<input type="submit" onChange={this.handleChange} value="Save"/>
+				{/*display list of courses from redux store*/}
+				{/*concise arrow syntax - we can ommit the return keyword cause we wrapped our expression in parentheses*/}
+				{this.props.courses.map(course => (
+					<div key={course.title}>{course.title}</div>
+				))}
 			</form>
 		)
 	}
 }
 
 CoursesPage.propTypes = {
+	courses: PropTypes.array.isRequired,
 	dispatch: PropTypes.func.isRequired
 }
 
@@ -53,5 +58,5 @@ function mapStateToProps(state, ownProps) {
 }
 
 // the 2 parantheses ()() - this is 2 function calls. the connect function returns a function, that function then calls our component.
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage)
+export default connect(mapStateToProps)(CoursesPage)
 // mapDispatchToProps parameter is optional, when we omit it, our component gets a dispatch prop injected automatically so we can dispatch actions.
