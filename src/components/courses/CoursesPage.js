@@ -9,6 +9,9 @@ class CoursesPage extends React.Component {
 				title: ""
 			}
 		}
+		
+		// binding in the constructor approch is preferble - now the func is only bound once
+		this.handleChange = this.handleChange.bind(this)
 	}
 	
 	handleChange(event) {
@@ -25,7 +28,6 @@ class CoursesPage extends React.Component {
 			<form>
 				<h2>Courses</h2>
 				<h3>Add Course</h3>
-				{/*we could bind here: this.handleChange.bind(this), but it's not ideal since a new func is allocated on every render*/}
 				<input type="text" onChange={this.handleChange} value={this.state.course.title}/>
 				<input type="submit" onChange={this.handleChange} value="Save"/>
 			</form>
