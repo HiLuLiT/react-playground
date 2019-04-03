@@ -10,11 +10,10 @@ class CoursesPage extends React.Component {
 			}
 		}
 		
-		// binding in the constructor approch is preferble - now the func is only bound once
-		this.handleChange = this.handleChange.bind(this)
 	}
 	
-	handleChange(event) {
+	// best bind approach - arrow functions. they inherit the binding context of their enclosing scope.
+	handleChange = event => {
 		// create a copy of our course object that refelcts the new title
 		// there's an issue - our function is inheriting the this context of the caller (the change handler). we need to bind this to our instance.
 		const course = { ...this.state.course, title: event.target.value }
