@@ -3,7 +3,6 @@
 
 import {createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './reducers/index'
-
 // middleware setup in order to be able to interact with redux store in dev tools
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
 
