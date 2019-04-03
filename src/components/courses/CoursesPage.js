@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import * as courseActions from '../../redux/actions/courseActions'
 import PropTypes from 'prop-types'
+import {bindActionCreators} from 'redux'
 
 class CoursesPage extends React.Component {
 		state = {
@@ -17,7 +18,7 @@ class CoursesPage extends React.Component {
 	
 	handleSubmit = event => {
 		event.preventDefault();
-		this.props.createCourse(this.state.course)
+		this.props.actions.createCourse(this.state.course)
 	}
 	
 	render() {
@@ -37,9 +38,7 @@ class CoursesPage extends React.Component {
 
 CoursesPage.propTypes = {
 	courses: PropTypes.array.isRequired,
-	// since we declared mapDispatchToProps, dispatch is no longer injected.
-	// Only the actions we declared in mapDispatchToProps are passed in.
-	createCourse: PropTypes.func.isRequired
+	actions: PropTypes.object.isRequired
 }
 
 
@@ -48,15 +47,13 @@ function mapStateToProps(state) {
 		courses: state.courses
 	}
 }
-
-// second way to use mapDispatchToProps - wrap it Manually
-// recives dispatch as sole argument
-// the actions we choose to return here will be available on props
+// redux comes with a helper function to save us from have to manually wrap our action creators in a dispatch call
+// this function is called bindActionCreators
 function mapDispatchToProps(dispatch) {
 	return {
-		// here we pass our action creators to dispatch, to fire the action.
-		// remember if you don't call dispatch nothing happens. action creators must be called by dispatch.
-		createCourse: course => dispatch(courseActions.createCourse(course))
+		// this one line ends up wrapping all of our course actions -
+		// right now it has only one, but if we add more no need to change this line.
+		actions: bindActionCreators(courseActions, dispatch)
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage)
