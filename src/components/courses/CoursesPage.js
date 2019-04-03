@@ -1,15 +1,10 @@
 import React from 'react'
 
 class CoursesPage extends React.Component {
-	constructor(props) {
-		super(props)
-		
-		this.state = {
+		state = {
 			course: {
 				title: ""
 			}
-		}
-		
 	}
 	
 	// best bind approach - arrow functions. they inherit the binding context of their enclosing scope.
